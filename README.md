@@ -6,6 +6,9 @@ Unity-Chan Battle is an action game.
 Players can control the beloved Unity-Chan to fight with monsters and other players in a sandbox.
 Win or go home because a skilled Unity-Chan always acheive her goals!
 
+## Demo
+[![Watch the video](https://img.youtube.com/vi/iDUXtkjC1SQ/hqdefault.jpg)](https://youtu.be/iDUXtkjC1SQ)
+
 ## Player Status
 #### Health Point
 #### Stamina
