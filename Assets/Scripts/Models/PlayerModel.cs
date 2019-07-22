@@ -4,48 +4,63 @@ using WeaponModel;
 public class PlayerModel {
 
   public static enum Party { Red, Blue };
-
+  private string name;
+  private boolean isBot;
   private float healthPoint = 100;
   private float stamina = 100;
   private Party party;
   // TODO: change the magic number here. number of weapons should be limited
   private WeaponModel[] weapons = new WeaponModel[10];
 
-  public boolean isAlive() {
+  public PlayerModel(Party party, string name, boolean isBot) {
+    this.party = party;
+    this.name = name;
+    this.isBot = isBot;
+  }
+
+  public boolean IsAlive() {
     return this.healthPoint > 0;
   }
 
-  public float getHealthPoint() {
+  public string GetName() {
+    return this.name;
+  }
+
+  public boolean IsBot() {
+    return this.isBot;
+  }
+
+  public float GetHealthPoint() {
     return this.healthPoint;
   }
 
-  public float getStamina() {
+  public float GetStamina() {
     return this.stamina;
   }
 
-  public Party getParty() {
+  public Party GetParty() {
     return this.party;
   }
 
-  public WeaponModel[] getWeapons() {
+  public WeaponModel[] GetWeapons() {
     return this.weapons;
   }
 
-  public void receiveDamage(float points) {
+  public void ReceiveDamage(float points) {
     this.healthPoint = this.healthPoint - points;
   }
 
-  public void regainHealth(float points) {
+  public void RegainHealth(float points) {
     this.healthPoint = min(100, this.healthPoint + points);
   }
 
-  public void useStamina(float amount) {
+  public void UseStamina(float amount) {
     if (this.stamina - this.amount >= 0) {
       this.stamina = this.stamina - amount;
     }
   }
 
-  public void regainStamina(float amount) {
+  public void RegainStamina(float amount) {
     this.stamina = min(100, this.stamina + amount);
   }
 
