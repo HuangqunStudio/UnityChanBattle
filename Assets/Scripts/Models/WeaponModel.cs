@@ -11,41 +11,51 @@ public class WeaponModel {
   private float attackInterval;
   private float durable;
   private float usage;
+
+  public WeaponModel(string name, string description, WeaponType type, float damage, float attackInterval, float durable, float usage) {
+    this.name = name;
+    this.description = description;
+    this.type = type;
+    this.damage = damage;
+    this.attackInterval = attackInterval;
+    this.durable = durable;
+    this.usage = usage;
+  }
   
-  public string getName() {
+  public string GetName() {
     return this.name;
   }
 
-  public string getDescription() {
+  public string GetDescription() {
     return this.description;
   }
 
-  public WeaponType getType() {
+  public WeaponType GetType() {
     return this.type;
   }
 
-  public float getDamage() {
+  public float GetDamage() {
     return this.damage;
   }
 
-  public float getAttackInterval() {
+  public float GetAttackInterval() {
     return this.attackInterval;
   }
-  public float getDurable() {
+  public float GetDurable() {
     return this.durable;
   }
 
-  public float getUsage() {
+  public float GetUsage() {
     return this.usage;
   }
 
-  public boolean isUsable() {
+  public boolean IsUsable() {
     return this.durable > 0;
   }
 
   // this function will only be called when weapon really
   // hit some objects
-  public void useWeapon() {
+  public void UseWeapon() {
     this.durable = this.durable - this.usage;
   }
 
