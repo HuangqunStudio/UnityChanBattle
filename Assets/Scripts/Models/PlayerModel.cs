@@ -3,65 +3,89 @@ using WeaponModel;
 
 public class PlayerModel {
 
-  public static enum Party { Red, Blue };
-  private string name;
-  private boolean isBot;
-  private float healthPoint = 100;
-  private float stamina = 100;
-  private Party party;
-  // TODO: change the magic number here. number of weapons should be limited
-  private WeaponModel[] weapons = new WeaponModel[10];
+  public static int MAX_WEAPON_CAPACITY = 10;
+  public static float MAX_HEALTH_POINT = 100;
+  public static float MAX_STAMINA_POINT = 100;
+  public static enum Party { red, blue };
+
+  private string Name;
+  private boolean IsBot;
+  private float HealthPoint = PlayerModel.MAX_HEALTH_POINT;
+  private float Stamina = PlayerModel.MAX_STAMINA_POINT;
+  private Party Party;
+  private ArrayList<WeaponModel> Weapons = new ArrayList<WeaponModel>();
 
   public PlayerModel(Party party, string name, boolean isBot) {
-    this.party = party;
-    this.name = name;
-    this.isBot = isBot;
+    this.Party = party;
+    this.Name = name;
+    this.IsBot = isBot;
   }
 
   public boolean IsAlive() {
-    return this.healthPoint > 0;
+    return this.HealthPoint > 0;
   }
 
   public string GetName() {
-    return this.name;
+    return this.Name;
   }
 
   public boolean IsBot() {
-    return this.isBot;
+    return this.IsBot;
   }
 
   public float GetHealthPoint() {
-    return this.healthPoint;
+    return this.HealthPoint;
   }
 
   public float GetStamina() {
-    return this.stamina;
+    return this.Stamina;
   }
 
   public Party GetParty() {
-    return this.party;
+    return this.Party;
   }
 
   public WeaponModel[] GetWeapons() {
-    return this.weapons;
+    return this.Weapons;
   }
 
   public void ReceiveDamage(float points) {
-    this.healthPoint = this.healthPoint - points;
+    this.HealthPoint = this.healthPoint - points;
   }
 
   public void RegainHealth(float points) {
-    this.healthPoint = min(100, this.healthPoint + points);
+    this.HealthPoint = min(100, this.HealthPoint + points);
   }
 
   public void UseStamina(float amount) {
-    if (this.stamina - this.amount >= 0) {
-      this.stamina = this.stamina - amount;
+    if (this.Stamina - this.amount >= 0) {
+      this.Stamina = this.Stamina - amount;
     }
   }
 
   public void RegainStamina(float amount) {
-    this.stamina = min(100, this.stamina + amount);
+    this.Stamina = min(100, this.Stamina + amount);
+  }
+
+  public boolean PickUpWeapon(WeaponModel pickWeapon, int dropWeaponIndex) {
+    if (dropWeaponIndex < 0 || dropWeaponIndex >= WeaponModel.MAX_WEAPON_CAPACITY) {
+      return false;
+    }
+
+    if (this.Weapons.Count >= WeaponModel.MAX_WEAPON_CAPACITY) {
+      this.Weapons.Insert(dropWeaponIndex, pickWeapon);
+      return true;
+    }
+
+    this.Weapons.Add(weapon);
+  }
+
+  public boolean DropWeapon(int dropWeaponIndex) {
+    if (dropWeaponIndex < 0 || dropWeaponIndex >= this.Weapons.Count) {
+      return false;
+    }
+    this.Weapons.RemoveAt(dropWeaponIndex);
+    return true;
   }
 
 }

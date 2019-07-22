@@ -3,6 +3,7 @@ using UnrealEngine;
 public class WeaponModel {
 
   public static enum WeaponType { sword, dagger, staff }
+  public static enum WeaponRarity { normal, rare, veryRare, ultraRare }
 
   private string name;
   private string description;
@@ -11,8 +12,11 @@ public class WeaponModel {
   private float attackInterval;
   private float durable;
   private float usage;
+  private WeaponRarity rarity;
+  private Tuple<float, float, float> location;
+  private boolean isPicked = false;
 
-  public WeaponModel(string name, string description, WeaponType type, float damage, float attackInterval, float durable, float usage) {
+  public WeaponModel(string name, string description, WeaponType type, float damage, float attackInterval, float durable, float usage, WeaponRarity rarity, float x, float y, float z) {
     this.name = name;
     this.description = description;
     this.type = type;
@@ -20,6 +24,8 @@ public class WeaponModel {
     this.attackInterval = attackInterval;
     this.durable = durable;
     this.usage = usage;
+    this.rarity = rarity;
+    this.location = Tuple.Create(x, y, z);
   }
   
   public string GetName() {
