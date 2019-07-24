@@ -1,6 +1,7 @@
 using UnityEngine;
 using Player;
 using Weapon;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,11 +12,13 @@ namespace Game {
 
     private ArrayList Players = new ArrayList();
     private ArrayList Weapons = new ArrayList();
-    private float Duration;
+    private double Duration;
+    private DateTime StartTime;
 
 
     public GameModel(float duration) {
       this.Duration = duration;
+      this.StartTime = DateTime.Now;
     }
 
     public bool AddPlayer(PlayerModel player) {
@@ -36,9 +39,17 @@ namespace Game {
       return result;
     }
 
-    // public boolean IsGameOver(GameStatusCheck check) {
-    //   return check(this.)
-    // }
+    public boolean IsGameOver(GameStatusCheck check) {
+      DateTime expectedEnd = this.StartTime.Add(this.Duration);
+      if (this.check(this.Players) && DateTime.Compare(expectedEnd, DateTime.Now) >= 0) {
+        return true;
+      }
+      return false;
+    }
 
+    public Boolean IsTimeUp() {
+      DateTime expectedEnd = this.StartTime.Add(this.Duration);
+      return DateTime.Compare(expectedEnd, DateTime.Now) <= 0;
+    }
   }
 }
