@@ -9,7 +9,7 @@ namespace Player {
     public static int MAX_WEAPON_CAPACITY = 10;
     public static float MAX_HEALTH_POINT = 100;
     public static float MAX_STAMINA_POINT = 100;
-    public enum Party { red, blue };
+    public enum Party { Red, Blue };
 
     private string name;
     private string playerId;

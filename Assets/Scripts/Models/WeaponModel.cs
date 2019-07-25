@@ -6,8 +6,8 @@ using System.Collections.Generic;
 namespace Weapon {
   public class WeaponModel {
 
-    public enum WeaponType { sword, dagger, staff };
-    public enum WeaponRarity { normal, rare, veryRare, ultraRare };
+    public enum WeaponType { Sword, Dagger, Staff };
+    public enum WeaponRarity { Normal, Rare, VeryRare, UltraRare };
 
     private string name;
     private string description;
