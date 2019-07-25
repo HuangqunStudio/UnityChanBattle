@@ -1,4 +1,3 @@
-using UnityEngine;
 using Weapon;
 using System;
 using System.Collections;
@@ -12,76 +11,97 @@ namespace Player {
     public static float MAX_STAMINA_POINT = 100;
     public enum Party { red, blue };
 
-    private string Name;
-    private bool IsRobot;
-    private float HealthPoint = MAX_HEALTH_POINT;
-    private float Stamina = MAX_STAMINA_POINT;
-    private Party PlayerParty;
-    private ArrayList Weapons = new ArrayList();
+    private string name;
+    private string playerId;
+    private bool isRobot;
+    private float healthPoint = MAX_HEALTH_POINT;
+    private float stamina = MAX_STAMINA_POINT;
+    private Party playerParty;
+    private List<WeaponModel> weapons = new List<WeaponModel>();
+
+    public string Name {
+      get {
+        return this.name;
+      }
+    }
+
+    public string PlayerId {
+      get {
+        return this.playerId;
+      }
+    }
+
+    public bool IsRobot {
+      get {
+        return this.isRobot;
+      }
+    }
+
+    public bool IsAlive {
+      get {
+        return this.healthPoint > 0;
+      }
+    }
+
+    public float HealthPoint {
+      get {
+        return this.healthPoint;
+      }
+    }
+
+    public float Stamina {
+      get {
+        return this.stamina;
+      }
+    }
+
+    public Party Party {
+      get {
+        return this.party;
+      }
+    }
+
+    public List<WeaponModel> Weapons {
+      get {
+        return this.weapons;
+      }
+    }
 
     public PlayerModel(Party party, string name, bool isBot) {
-      this.PlayerParty = party;
-      this.Name = name;
-      this.IsRobot = isBot;
-    }
-
-    public bool IsAlive() {
-      return this.HealthPoint > 0;
-    }
-
-    public string GetName() {
-      return this.Name;
-    }
-
-    public bool IsBot() {
-      return this.IsRobot;
-    }
-
-    public float GetHealthPoint() {
-      return this.HealthPoint;
-    }
-
-    public float GetStamina() {
-      return this.Stamina;
-    }
-
-    public Party GetParty() {
-      return this.PlayerParty;
-    }
-
-    public ArrayList GetWeapons() {
-      return this.Weapons;
+      this.playerParty = party;
+      this.name = name;
+      this.isRobot = isBot;
     }
 
     public void ReceiveDamage(float points) {
-      this.HealthPoint = this.HealthPoint - points;
+      this.healthPoint = Math.Max(0, this.healthPoint - points);
     }
 
     public void RegainHealth(float points) {
-      this.HealthPoint = Math.Min(100, this.HealthPoint + points);
+      this.healthPoint = Math.Min(MAX_HEALTH_POINT, this.healthPoint + points);
     }
 
     public void UseStamina(float amount) {
-      if (this.Stamina - amount >= 0) {
-        this.Stamina = this.Stamina - amount;
+      if (this.stamina - amount >= 0) {
+        this.stamina = this.stamina - amount;
       }
     }
 
     public void RegainStamina(float amount) {
-      this.Stamina = Math.Min(100, this.Stamina + amount);
+      this.stamina = Math.Min(MAX_STAMINA_POINT, this.stamina + amount);
     }
 
     public bool PickUpWeapon(WeaponModel pickWeapon, int dropWeaponIndex) {
-      if (dropWeaponIndex < 0 || dropWeaponIndex >= PlayerModel.MAX_WEAPON_CAPACITY) {
+      if (dropWeaponIndex < 0 || dropWeaponIndex >= MAX_WEAPON_CAPACITY) {
         return false;
       }
 
-      if (this.Weapons.Count >= PlayerModel.MAX_WEAPON_CAPACITY) {
-        this.Weapons.Insert(dropWeaponIndex, pickWeapon);
+      if (this.weapons.Count >= MAX_WEAPON_CAPACITY) {
+        this.weapons.Insert(dropWeaponIndex, pickWeapon);
         return true;
       }
 
-      this.Weapons.Add(pickWeapon);
+      this.weapons.Add(pickWeapon);
       return true;
     }
 
@@ -89,7 +109,7 @@ namespace Player {
       if (dropWeaponIndex < 0 || dropWeaponIndex >= this.Weapons.Count) {
         return false;
       }
-      this.Weapons.RemoveAt(dropWeaponIndex);
+      this.weapons.RemoveAt(dropWeaponIndex);
       return true;
     }
 

@@ -1,4 +1,3 @@
-using UnityEngine;
 using Player;
 using Weapon;
 using System;
@@ -10,46 +9,61 @@ namespace Game {
 
     public static int MAX_PLAYER_CAPCITY = 100;
 
-    private ArrayList Players = new ArrayList();
-    private ArrayList Weapons = new ArrayList();
-    private double Duration;
-    private DateTime StartTime;
+    private List<PlayerModel> players = new List<PlayerModel>();
+    private List<WeaponModel> weapons = new List<WeaponModel>();
+    private double duration;
+    private DateTime startTime;
 
+    public List<PlayerModel> Players {
+      get {
+        return this.players;
+      }
+    }
+
+    public bool IsTimeUp {
+      get {
+        DateTime expectedEnd = this.startTime.Add(this.duration);
+        return DateTime.Compare(expectedEnd, DateTime.Now) <= 0;
+      }
+    }
+
+    public List<PlayerModel> AlivePlayers {
+      get {
+        List<PlayerModel> result = new List<PlayerModel>();
+        foreach (PlayerModel player in this.players) {
+          if (player.IsAlive) {
+            result.Add(player);
+          }
+        }
+        return result;
+      }
+    }
+
+    public List<WeaponModel> Weapons {
+      get {
+        return this.weapons;
+      }
+    }
 
     public GameModel(float duration) {
-      this.Duration = duration;
-      this.StartTime = DateTime.Now;
+      this.duration = duration;
+      this.startTime = DateTime.Now;
     }
 
     public bool AddPlayer(PlayerModel player) {
-      if (this.Players.Count >= MAX_PLAYER_CAPCITY) {
+      if (this.players.Count >= MAX_PLAYER_CAPCITY) {
         return false;
       }
-      this.Players.Add(player);
+      this.players.Add(player);
       return true;
     }
 
-    public List<PlayerModel> GetAlivePlayers() {
-      List<PlayerModel> result = new List<PlayerModel>();
-      foreach (PlayerModel player in this.Players) {
-        if (player.IsAlive()) {
-          result.Add(player);
-        }
-      }
-      return result;
-    }
-
-    public boolean IsGameOver(GameStatusCheck check) {
+    public bool IsGameOver(GameStatusCheck check) {
       DateTime expectedEnd = this.StartTime.Add(this.Duration);
-      if (this.check(this.Players) && DateTime.Compare(expectedEnd, DateTime.Now) >= 0) {
+      if (this.IsTimeUp || this.check(this.Players)) {
         return true;
       }
       return false;
-    }
-
-    public Boolean IsTimeUp() {
-      DateTime expectedEnd = this.StartTime.Add(this.Duration);
-      return DateTime.Compare(expectedEnd, DateTime.Now) <= 0;
     }
   }
 }
