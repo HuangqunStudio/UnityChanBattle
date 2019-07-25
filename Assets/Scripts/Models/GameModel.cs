@@ -22,7 +22,7 @@ namespace Game {
 
     public bool IsTimeUp {
       get {
-        DateTime expectedEnd = this.startTime.Add(this.duration);
+        DateTime expectedEnd = this.startTime.Add(TimeSpan.FromSeconds(this.duration));
         return DateTime.Compare(expectedEnd, DateTime.Now) <= 0;
       }
     }
@@ -58,12 +58,13 @@ namespace Game {
       return true;
     }
 
-    public bool IsGameOver(GameStatusCheck check) {
-      DateTime expectedEnd = this.StartTime.Add(this.Duration);
-      if (this.IsTimeUp || this.check(this.Players)) {
-        return true;
-      }
-      return false;
-    }
+    // public bool IsGameOver(GameStatusCheck check) {
+    //   DateTime expectedEnd = this.StartTime.Add(this.Duration);
+    //   if (this.IsTimeUp || this.check(this.Players)) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
   }
+
 }

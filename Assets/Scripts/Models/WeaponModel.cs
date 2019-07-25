@@ -25,13 +25,13 @@ namespace Weapon {
       }
     }
 
-    public string description {
+    public string Description {
       get {
         return this.description;
       }
     }
 
-    public WeaponType WeaponType {
+    public WeaponType WeaponT {
       get {
         return this.weaponType;
       }
@@ -88,10 +88,10 @@ namespace Weapon {
     public WeaponModel(string name, string description, WeaponType type, float damage, float attackInterval, float durable, float usage, WeaponRarity rarity, float x, float y, float z) {
       this.name = name;
       this.description = description;
-      this.type = type;
+      this.weaponType = type;
       this.damage = damage;
       this.attackInterval = attackInterval;
-      this.durable = durable;
+      this.durability = durability;
       this.usage = usage;
       this.rarity = rarity;
       this.location = Tuple.Create(x, y, z);

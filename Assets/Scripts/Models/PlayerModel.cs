@@ -55,9 +55,9 @@ namespace Player {
       }
     }
 
-    public Party Party {
+    public Party PlayerParty {
       get {
-        return this.party;
+        return this.playerParty;
       }
     }
 
