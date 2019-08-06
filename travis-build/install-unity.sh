@@ -2,7 +2,7 @@
 
 # Refer to https://unity3d.com/get-unity/download/archive for unityhub://$VERSION/$HASH link
 BASE_URL=https://download.unity3d.com/download_unity
-VERSION=2019.1.11
+VERSION=2019.1.11f1
 HASH=9b001d489a54
 
 download() {
