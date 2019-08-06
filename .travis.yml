@@ -16,7 +16,6 @@ notifications:
     on_failure: change
 
 before_install:
-- bundle install
 - chmod a+x ./travis-build/*.sh
 
 install:
